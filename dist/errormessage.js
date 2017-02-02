@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["ErrorMessage"] = factory();
+		exports["EM"] = factory();
 	else
-		root["ErrorMessage"] = factory();
+		root["EM"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -59,7 +59,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ErrorMessage = undefined;
 
 	var _classCallCheck2 = __webpack_require__(8);
 
@@ -71,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ErrorMessage = exports.ErrorMessage = function () {
+	var ErrorMessage = function () {
 	  (0, _createClass3.default)(ErrorMessage, null, [{
 	    key: 'use',
 	    value: function use(fn) {
@@ -113,6 +112,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}();
 
 	ErrorMessage.middleware = [];
+	exports.default = ErrorMessage;
+	module.exports = exports['default'];
 
 /***/ },
 /* 1 */

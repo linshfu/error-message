@@ -1,4 +1,4 @@
-export class ErrorMessage {
+export default class ErrorMessage {
   static middleware = []
 
   static use(fn) {
