@@ -8,7 +8,7 @@ let config = {
     ]
   },
   output: {
-    library: 'EM',
+    library: 'ErrorMessage',
     libraryTarget: 'umd'
   },
   plugins: [
