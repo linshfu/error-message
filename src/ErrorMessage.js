@@ -15,7 +15,7 @@ export default class ErrorMessage {
 
   constructor(error = {}) {
     this.errorCode = error.code || '#'
-    this.errorMessage = error.msg || 'error'
+    this.errorMessage = error.msg || 'System Error'
   }
 
   toString() {
