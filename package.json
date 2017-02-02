@@ -1,0 +1,44 @@
+{
+  "name": "error-message",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/errormessage.js",
+  "scripts": {
+    "build": "npm run clean && npm run build:umd && npm run build:umd:min",
+    "build:dev": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.js -w",
+    "build:umd": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.js",
+    "build:umd:min": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.min.js -p",
+    "clean": "rm -rf dist",
+    "demo": "browser-sync start --serveStatic example dist",
+    "lint": "eslint src",
+    "test": "mocha --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linshfu/error-message.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linshfu/error-message/issues"
+  },
+  "homepage": "https://github.com/linshfu/error-message#readme",
+  "dependencies": {
+    "babel-runtime": "^6.22.0",
+    "lodash.get": "^4.4.2",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "browser-sync": "^2.14.0",
+    "mocha": "^3.0.2",
+    "webpack": "^1.13.2"
+  }
+}
