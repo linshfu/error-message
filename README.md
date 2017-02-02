@@ -6,13 +6,11 @@
       return { code: error.code, msg: `${error.msg}[${error.code}]`}
     })
 
-    function parse(error) {
-      return new ErrorMessage(error)
-    }
-
-    const m = parse({
+    const error = {
       code: 10100,
       msg: 'test'
-    })
+    }
 
-    console.log(m.msg())
+    const m = ErrorMessage.parse(error).msg()
+
+    console.log(m)
