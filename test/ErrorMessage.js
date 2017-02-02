@@ -26,18 +26,3 @@ export class ErrorMessage {
     return ErrorMessage.middleware.reduce((error, fn) => fn(error), { code: this.errorCode, msg: this.errorMessage }).msg
   }
 }
-
-ErrorMessage.use(function (error) {
-  return { code: error.code, msg: `${error.msg}[${error.code}]`}
-})
-
-function parse(error) {
-  return new ErrorMessage(error)
-}
-
-const m = parse({
-  code: 10100,
-  msg: 'test'
-})
-
-console.log(m.msg())
