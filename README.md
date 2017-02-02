@@ -1,5 +1,7 @@
 # error-message
 
+    import ErrorMessage from 'error-message'
+    
     ErrorMessage.use(function (error) {
       return { code: error.code, msg: `${error.msg}[${error.code}]`}
     })
