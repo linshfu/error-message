@@ -9,6 +9,10 @@ export default class ErrorMessage {
     this.middleware = this.middleware.concat(Array.isArray(fn) ? fn : [fn])
   }
 
+  static parse(error) {
+    return new ErrorMessage(error)
+  }
+
   constructor(error = {}) {
     this.errorCode = error.code || '#'
     this.errorMessage = error.msg || 'error'

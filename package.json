@@ -1,7 +1,7 @@
 {
   "name": "error-message",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "error-message",
   "main": "dist/errormessage.js",
   "scripts": {
     "build": "npm run clean && npm run build:umd && npm run build:umd:min",
@@ -19,7 +19,7 @@
     "url": "git+https://github.com/linshfu/error-message.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/linshfu/error-message/issues"
   },

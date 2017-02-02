@@ -80,6 +80,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.middleware = this.middleware.concat(Array.isArray(fn) ? fn : [fn]);
 	    }
+	  }, {
+	    key: 'parse',
+	    value: function parse(error) {
+	      return new ErrorMessage(error);
+	    }
 	  }]);
 
 	  function ErrorMessage() {
