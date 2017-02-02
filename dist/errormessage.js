@@ -114,22 +114,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	ErrorMessage.middleware = [];
 
-
-	ErrorMessage.use(function (error) {
-	  return { code: error.code, msg: error.msg + '[' + error.code + ']' };
-	});
-
-	function parse(error) {
-	  return new ErrorMessage(error);
-	}
-
-	var m = parse({
-	  code: 10100,
-	  msg: 'test'
-	});
-
-	console.log(m.msg());
-
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
