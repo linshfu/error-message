@@ -1,6 +1,6 @@
 {
   "name": "error-message",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "error-message",
   "main": "dist/errormessage.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "build:dev": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.js -w",
     "build:umd": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.js",
     "build:umd:min": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.min.js -p",
+    "dev": "npm run clean && npm run build:umd && npm run demo",
     "clean": "rm -rf dist",
     "demo": "browser-sync start --serveStatic example dist",
     "lint": "eslint src",

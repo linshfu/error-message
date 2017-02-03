@@ -1,13 +1,10 @@
-ErrorMessage.use(function (error) {
-  return { code: error.code, msg: `${error.msg}[${error.code}]`}
+ErrorMessage.use((error) => {
+  const msg = `${error.msg}[${error.code}]`
+  return { code: error.code, msg: msg}
 })
 
-const error = {
-  code: 10100,
-  msg: 'test'
-}
+const m_error = { code: 10100, msg: 'test' }
 
-const m = ErrorMessage.parse(error).msg()
+const m = ErrorMessage.parse(m_error).msg()
 
 console.log(m)
-document.write(m)
