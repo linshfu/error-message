@@ -6,6 +6,9 @@ test/
 .babelrc
 .editorconfig
 .npmignore
+.gitignore
+server.js
+nodemon.json
 webpack.config.js
 webpack.dev.config.js
 node_modules/

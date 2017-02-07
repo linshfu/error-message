@@ -1,1 +1,11 @@
+.git
+test/
+.babelrc
+.editorconfig
+.npmignore
+.gitignore
+index.js
+server.js
+nodemon.json
+webpack.dev.config.js
 node_modules/
