@@ -1,0 +1,11 @@
+.git
+dist/
+example/
+src/
+test/
+.babelrc
+.editorconfig
+.npmignore
+webpack.config.js
+webpack.dev.config.js
+node_modules/

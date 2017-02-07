@@ -1,7 +1,8 @@
 export default class ErrorMessage {
   constructor(error = {}) {
-    this.errorCode = error.code || '#'
-    this.errorMessage = error.msg || 'System Error'
+    this.error = error
+    error.code = (typeof error.code === 'number')? error.code : '#'
+    error.msg = (typeof error.msg === 'string')? error.msg : 'System Error'
   }
 
   static middleware = []
@@ -12,36 +13,24 @@ export default class ErrorMessage {
       return
     }
 
-    this.middleware = this.middleware.concat(Array.isArray(fn) ? fn : [fn])
+    ErrorMessage.middleware.push(fn)
   }
+
   static parse(error) {
-    let boolean = false
-    if (typeof error === 'object') {
-      if (typeof error.code === 'number') {
-        if (typeof error.msg === 'string') {
-          boolean = true
-        } else {
-          console.error('ErrorMessage.parse(error) typeof error: error.msg !== \'string\'')
-        }
-      } else {
-        console.error('ErrorMessage.parse(error) typeof error: error.code !== \'number\'')
-      }
-    } else {
-      console.error('ErrorMessage.parse(error) typeof error: error !== \'object\'')
-    }
-    return (boolean)? new ErrorMessage(error): new ErrorMessage()
-
+    return (typeof error === 'object')?  new ErrorMessage(error) :  new ErrorMessage()
   }
 
-  toString() {
-    return `${this.errorMessage}[${this.errorCode}]`
+  executeMiddleware(middleware, data, next) {
+    const composition = middleware.reduceRight((next, fn) => () => {
+      this.error = data
+      fn(this.error, next)
+    }, next)
+    composition(data)
   }
 
-  code() {
-    return this.errorCode
-  }
-
-  msg() {
-    return ErrorMessage.middleware.reduce((error, fn) => fn(error), { code: this.errorCode, msg: this.errorMessage }).msg
+  getObject() {
+    const data = this.error
+    this.executeMiddleware(ErrorMessage.middleware, data, (error, next) => {})
+    return data
   }
 }

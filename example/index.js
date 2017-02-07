@@ -1,10 +1,15 @@
-ErrorMessage.use((error) => {
-  const msg = `${error.msg}[${error.code}]`
-  return { code: error.code, msg: msg}
+import {use,parse} from '../src/ErrorMessage.js'
+
+if (module.hot) {
+  module.hot.accept()
+}
+
+use((error) => {
+  error.msg = `${error.msg}[${error.code}]`
 })
 
 const m_error = { code: 10100, msg: 'test' }
 
-const m = ErrorMessage.parse(m_error).msg()
+const m = parse(m_error).getObject()
 
-console.log(m)
+console.log(m.msg)

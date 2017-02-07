@@ -79,26 +79,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	    (0, _classCallCheck3.default)(this, ErrorMessage);
 
-	    this.errorCode = error.code || '#';
-	    this.errorMessage = error.msg || 'System Error';
+	    this.error = error;
+	    error.code = typeof error.code === 'number' ? error.code : '#';
+	    error.msg = typeof error.msg === 'string' ? error.msg : 'System Error';
 	  }
 
 	  (0, _createClass3.default)(ErrorMessage, [{
-	    key: 'toString',
-	    value: function toString() {
-	      return this.errorMessage + '[' + this.errorCode + ']';
+	    key: 'executeMiddleware',
+	    value: function executeMiddleware(middleware, data, next) {
+	      var _this = this;
+
+	      var composition = middleware.reduceRight(function (next, fn) {
+	        return function () {
+	          _this.error = data;
+	          fn(_this.error, next);
+	        };
+	      }, next);
+	      composition(data);
 	    }
 	  }, {
-	    key: 'code',
-	    value: function code() {
-	      return this.errorCode;
-	    }
-	  }, {
-	    key: 'msg',
-	    value: function msg() {
-	      return ErrorMessage.middleware.reduce(function (error, fn) {
-	        return fn(error);
-	      }, { code: this.errorCode, msg: this.errorMessage }).msg;
+	    key: 'getObject',
+	    value: function getObject() {
+	      var data = this.error;
+	      this.executeMiddleware(ErrorMessage.middleware, data, function (error, next) {});
+	      return data;
 	    }
 	  }], [{
 	    key: 'use',
@@ -108,26 +112,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return;
 	      }
 
-	      this.middleware = this.middleware.concat(Array.isArray(fn) ? fn : [fn]);
+	      ErrorMessage.middleware.push(fn);
 	    }
 	  }, {
 	    key: 'parse',
 	    value: function parse(error) {
-	      var boolean = false;
-	      if ((typeof error === 'undefined' ? 'undefined' : (0, _typeof3.default)(error)) === 'object') {
-	        if (typeof error.code === 'number') {
-	          if (typeof error.msg === 'string') {
-	            boolean = true;
-	          } else {
-	            console.error('ErrorMessage.parse(error) typeof error: error.msg !== \'string\'');
-	          }
-	        } else {
-	          console.error('ErrorMessage.parse(error) typeof error: error.code !== \'number\'');
-	        }
-	      } else {
-	        console.error('ErrorMessage.parse(error) typeof error: error !== \'object\'');
-	      }
-	      return boolean ? new ErrorMessage(error) : new ErrorMessage();
+	      return (typeof error === 'undefined' ? 'undefined' : (0, _typeof3.default)(error)) === 'object' ? new ErrorMessage(error) : new ErrorMessage();
 	    }
 	  }]);
 	  return ErrorMessage;

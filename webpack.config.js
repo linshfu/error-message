@@ -1,15 +1,16 @@
-let webpack = require('webpack')
-let env = process.env.NODE_ENV
+const webpack = require('webpack')
 
-let config = {
+const env = process.env.NODE_ENV
+
+const config = {
+  output: {
+    library: 'ErrorMessage',
+    libraryTarget: 'umd'
+  },
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ }
     ]
-  },
-  output: {
-    library: 'ErrorMessage',
-    libraryTarget: 'umd'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
