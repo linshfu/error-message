@@ -85,34 +85,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  (0, _createClass3.default)(ErrorMessage, [{
-	    key: 'executeMiddleware',
-	    value: function executeMiddleware(middleware, data, next) {
-	      var _this = this;
-
-	      var composition = middleware.reduceRight(function (next, fn) {
-	        return function () {
-	          _this.error = data;
-	          fn(_this.error, next);
-	        };
-	      }, next);
-	      composition(data);
+	    key: 'toString',
+	    value: function toString() {
+	      return this.error.msg + '[' + this.error.code + ']';
 	    }
 	  }, {
-	    key: 'getObject',
-	    value: function getObject() {
-	      var data = this.error;
-	      this.executeMiddleware(ErrorMessage.middleware, data, function (error, next) {});
-	      return data;
+	    key: 'code',
+	    value: function code() {
+	      return this.error.code;
+	    }
+	  }, {
+	    key: 'msg',
+	    value: function msg() {
+	      return this.errorObject().msg;
+	    }
+	  }, {
+	    key: 'errorObject',
+	    value: function errorObject() {
+	      return ErrorMessage.middleware.reduce(function (error, fn) {
+	        return (0, _typeof3.default)(fn(error)) === 'object' ? fn(error) : error;
+	      }, this.error);
 	    }
 	  }], [{
 	    key: 'use',
 	    value: function use(fn) {
 	      if (!fn || typeof fn !== 'function') {
-	        console.error('ErrorMessage.use() error: .use( function )');
 	        return;
 	      }
 
-	      ErrorMessage.middleware.push(fn);
+	      ErrorMessage.middleware = ErrorMessage.middleware.concat(Array.isArray(fn) ? fn : [fn]);
 	    }
 	  }, {
 	    key: 'parse',

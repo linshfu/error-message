@@ -10,7 +10,7 @@ const config = {
   entry: [
     path.resolve(__dirname, "src/ErrorMessage.js"),
     path.resolve(__dirname, "example"),
-    'webpack-hot-middleware/client?path=/__webpack_hmr'
+    'webpack-hot-middleware/client'
   ],
   output: {
     path: path.resolve(__dirname, "example"),
@@ -31,11 +31,11 @@ const config = {
         template: 'example/index.html'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env)
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    })
   ]
 }
 

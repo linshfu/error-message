@@ -4,38 +4,28 @@
 
     import {use,parse} from 'error-message'
 
-    use((error) => {
-      error.msg = `${error.msg}[${error.code}]`
+    use(function (error) {
+      return { code: error.code, msg: `${error.msg}[${error.code}]`}
     })
 
     const m_error = { code: 10100, msg: 'test' }
 
-    const m = parse(m_error).getObject()
+    const m = parse(m_error).msg()
 
-    console.log(m.msg)
-
-    "test[10100]"
+    console.log(m)
 
 ---
 
-## Other
+## anOther
 
     import {use,parse} from 'error-message'
 
-    use((error,next) => {
+    use(function (error) {
       error.msg = `${error.msg}[${error.code}]`
-      next()
-    })
-
-    use((error,next) => {
-      error.msg += `!!!`
-      next()
     })
 
     const m_error = { code: 10100, msg: 'test' }
 
-    const m = parse(m_error).getObject()
+    const m = parse(m_error).msg()
 
-    console.log(m.msg)
-
-    "test[10100]!!!"
+    console.log(m)

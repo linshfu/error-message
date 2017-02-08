@@ -14,24 +14,25 @@ const browserSync = require("browser-sync").create()
 const port = 8080
 
 app.use(express.static('example'))
-//
+
 app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
+  quiet: true,
   publicPath: config.output.publicPath,
+  noInfo: true,
   stats: {
-    colors: true,
+      colors: true
   }
 }))
 
-app.use(webpackHotMiddleware(compiler, {}))
+app.use(webpackHotMiddleware(compiler))
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
+app.listen(port, function () {
+  console.log(`Example app listening on port ${port}!`)
   browserSync.init({
     open: 'local',
     ui: false,
     notify: false,
-    proxy: "localhost:8080",
+    proxy: `localhost:${port}`,
     port: 3000
   })
   console.log(`browserSync is running on prot 3000`)

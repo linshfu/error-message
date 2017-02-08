@@ -1,18 +1,11 @@
 {
   "name": "error-message",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "error-message",
   "main": "dist/errormessage.js",
   "scripts": {
-    "build": "npm run clean && npm run build:umd && npm run build:umd:min",
-    "build:dev": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.js -w",
-    "build:umd": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.js",
-    "build:umd:min": "NODE_ENV=production webpack src/ErrorMessage.js dist/errormessage.min.js -p",
-    "build:index": "npm run clean && NODE_ENV=production webpack src/ErrorMessage.js ./index.js",
-    "dev": "npm run clean && npm run build:umd && npm run demo",
-    "clean": "rm -rf dist",
-    "demo": "browser-sync start --serveStatic example dist",
-    "test": "webpack-dashboard -- nodemon --config nodemon.json ./server.js"
+    "build": "NODE_ENV=production webpack src/ErrorMessage.js ./index.js",
+    "dev": "webpack-dashboard -- nodemon --config nodemon.json ./server.js"
   },
   "repository": {
     "type": "git",

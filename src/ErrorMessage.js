@@ -9,28 +9,29 @@ export default class ErrorMessage {
 
   static use(fn) {
     if (!fn || typeof fn !== 'function') {
-      console.error('ErrorMessage.use() error: .use( function )')
       return
     }
 
-    ErrorMessage.middleware.push(fn)
+    ErrorMessage.middleware = ErrorMessage.middleware.concat(Array.isArray(fn) ? fn : [fn])
   }
 
   static parse(error) {
     return (typeof error === 'object')?  new ErrorMessage(error) :  new ErrorMessage()
   }
 
-  executeMiddleware(middleware, data, next) {
-    const composition = middleware.reduceRight((next, fn) => () => {
-      this.error = data
-      fn(this.error, next)
-    }, next)
-    composition(data)
+  toString() {
+    return `${this.error.msg}[${this.error.code}]`
   }
 
-  getObject() {
-    const data = this.error
-    this.executeMiddleware(ErrorMessage.middleware, data, (error, next) => {})
-    return data
+  code() {
+    return this.error.code
+  }
+
+  msg() {
+    return this.errorObject().msg
+  }
+
+  errorObject() {
+    return ErrorMessage.middleware.reduce((error, fn) => (typeof fn(error) === 'object') ? fn(error) : error,this.error)
   }
 }
