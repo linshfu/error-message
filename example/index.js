@@ -4,11 +4,9 @@ if (module.hot) {
   module.hot.accept()
 }
 
-use(function (error) {
-  error.msg = `${error.msg}[${error.code}]`
-})
+use((error) => error.msg = `${error.msg}[${error.code}]`)
 
-use(function (error) {
+use((error) => {
   return { code: error.code, msg: `${error.msg}[${error.code}]`}
 })
 
