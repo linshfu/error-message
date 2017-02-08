@@ -1,9 +1,0 @@
-{
-  "ignore": [
-    ".git",
-    "node_modules",
-    "example",
-    "src"
-  ],
-  "ext": "js json"
-}
