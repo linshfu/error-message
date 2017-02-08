@@ -79,9 +79,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	    (0, _classCallCheck3.default)(this, ErrorMessage);
 
-	    this.error = error;
-	    error.code = typeof error.code === 'number' ? error.code : '#';
-	    error.msg = typeof error.msg === 'string' ? error.msg : 'System Error';
+	    this.error = {
+	      code: typeof error.code === 'number' ? error.code : '#',
+	      msg: typeof error.msg === 'string' ? error.msg : 'System Error'
+	    };
 	  }
 
 	  (0, _createClass3.default)(ErrorMessage, [{
@@ -97,14 +98,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'msg',
 	    value: function msg() {
-	      return this.errorObject().msg;
-	    }
-	  }, {
-	    key: 'errorObject',
-	    value: function errorObject() {
 	      return ErrorMessage.middleware.reduce(function (error, fn) {
 	        return (0, _typeof3.default)(fn(error)) === 'object' ? fn(error) : error;
-	      }, this.error);
+	      }, this.error).msg;
 	    }
 	  }], [{
 	    key: 'use',

@@ -1,8 +1,9 @@
 export default class ErrorMessage {
   constructor(error = {}) {
-    this.error = error
-    error.code = (typeof error.code === 'number')? error.code : '#'
-    error.msg = (typeof error.msg === 'string')? error.msg : 'System Error'
+    this.error = {
+      code: (typeof error.code === 'number')? error.code : '#',
+      msg: (typeof error.msg === 'string')? error.msg : 'System Error'
+    }
   }
 
   static middleware = []
@@ -28,10 +29,6 @@ export default class ErrorMessage {
   }
 
   msg() {
-    return this.errorObject().msg
-  }
-
-  errorObject() {
-    return ErrorMessage.middleware.reduce((error, fn) => (typeof fn(error) === 'object') ? fn(error) : error,this.error)
+    return ErrorMessage.middleware.reduce((error, fn) => (typeof fn(error) === 'object') ? fn(error) : error,this.error).msg
   }
 }

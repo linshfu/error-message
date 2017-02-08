@@ -1,5 +1,4 @@
 .git
-dist/
 example/
 src/
 test/
@@ -7,6 +6,7 @@ test/
 .editorconfig
 .npmignore
 .gitignore
+index.js
 server.js
 nodemon.json
 webpack.config.js
