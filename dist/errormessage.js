@@ -53,10 +53,8 @@
 
       _classCallCheck(this, ErrorMessage);
 
-      this.error = {
-        code: typeof error.code === 'number' ? error.code : '#',
-        msg: typeof error.msg === 'string' ? error.msg : 'System Error'
-      };
+      this.error = error;
+      this.error.code = typeof error.code === 'number' ? error.code : '#', this.error.msg = typeof error.msg === 'string' ? error.msg : 'System Error';
     }
 
     _createClass(ErrorMessage, [{
