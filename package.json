@@ -1,6 +1,6 @@
 {
   "name": "error-message",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "error-message",
   "main": "dist/errormessage.js",
   "scripts": {
